@@ -14,5 +14,11 @@ else
     saPassword="DoNotTrustMe!"
 fi
 
-#change the container name to whatever name:tag you built with
-docker run --rm -d --name $containerName -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=$saPassword' -p 1433:1433 oskaremil/defaultdb:latest
+#
+# Change the container name to whatever name:tag you built with
+#
+# Depending on the speed of your system you might need to adjust
+# TIMEOUT to allow the SQL server to spin up before executing 
+# the CREATE database statement.
+#
+docker run --rm -d --name $containerName -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=$saPassword" -e "TIMEOUT=10" -p 1433:1433 oskaremil/defaultdb:latest
